@@ -1,20 +1,34 @@
 import { Register } from "./Register";
 import { Login } from "./Login";
-import { Student } from "./Student";
 import { Form } from "./Form";
 
-// Register a student
-const reg = new Register("John", "Doe", 1234567890, "pass123", "student");
-console.log("Registered:", reg);
+// Simulated database of registered users
+const users: Register[] = [
+  new Register("Alice", "Smith", 1111111111, "pass1", "student"),
+  new Register("Bob", "Brown", 2222222222, "pass2", "teacher"),
+];
 
-// Login
-const login = new Login(1234567890, "pass123");
-console.log("Logged in:", login);
+// New user registration attempt
+const newUser = new Register("Charlie", "Jones", 1111111111, "pass3", "student");
 
-// Create student instance
-const student = new Student("John", "Doe", "Male", "10A");
-console.log("Student profile created:", student);
+// Check if phone number already registered
+const existingUserIndex = newUser.CheckPhone(users);
+if (existingUserIndex !== -1) {
+  console.log("Phone number already registered!");
+} else {
+  users.push(newUser);
+  console.log("User registered successfully.");
+}
 
-// Submit a form
-const form = new Form("Sick leave", "2025-06-01", "2025-06-05");
-form.submitForm();
+// Attempt login with existing user credentials
+const loginAttempt = new Login(1111111111, "pass1");
+
+// Check login status
+const loginResult = loginAttempt.check(users);
+console.log(loginResult);
+
+// If login is successful, submit a form
+if (loginResult.startsWith("Login successful")) {
+  const form = new Form("Sick leave", "11/May/2025", "12/May/2025");
+  form.submitForm();
+}

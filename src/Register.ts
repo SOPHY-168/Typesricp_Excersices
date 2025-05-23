@@ -6,4 +6,7 @@ export class Register {
     public password: string,
     public role: string
   ) {}
+  public CheckPhone(users:Register[]):number{
+        return users.findIndex(u => u.phone === this.phone);
+  }
 }
