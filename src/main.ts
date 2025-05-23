@@ -1,19 +1,20 @@
-import { Teacher } from './Teacher';
-import { Student } from './Student';
-import { Admin } from './Admin';
-import { UserInterface } from './UserInterface';
+import { Register } from "./Register";
+import { Login } from "./Login";
+import { Student } from "./Student";
+import { Form } from "./Form";
 
-const ui = new UserInterface();
-ui.displayLogin();
+// Register a student
+const reg = new Register("John", "Doe", 1234567890, "pass123", "student");
+console.log("Registered:", reg);
 
-const teacher = new Teacher("Mr. Chan");
-const student = new Student("Sokha");
-const admin = new Admin("Admin1", ["add", "delete", "update"]);
+// Login
+const login = new Login(1234567890, "pass123");
+console.log("Logged in:", login);
 
-student.login();
-teacher.login();
-admin.login();
+// Create student instance
+const student = new Student("John", "Doe", "Male", "10A");
+console.log("Student profile created:", student);
 
-ui.displayMenu();
-student.askPermission(teacher, ui);
-admin.manageUsers();
+// Submit a form
+const form = new Form("Sick leave", "2025-06-01", "2025-06-05");
+form.submitForm();

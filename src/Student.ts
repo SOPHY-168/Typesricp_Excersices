@@ -1,18 +1,12 @@
-import { User } from './User';
-import { Teacher } from './Teacher';
-import { UserInterface } from './UserInterface';
+import { User } from "./User";
 
 export class Student extends User {
-  askPermission(teacher: Teacher, ui: UserInterface): void {
-    console.log(this.name + " is preparing a permission request...");
-
-    const details = ui.collectPermissionDetails();
-
-    console.log(this.name + " asks for permission.");
-    console.log("Reason: " + details.reason);
-    console.log("From: " + details.startDate + " To: " + details.endDate);
-    
-    const response = teacher.givePermission();
-    console.log("Teacher says: " + response);
+  constructor(
+    fname: string,
+    lname: string,
+    gender: string,
+    public classes: string
+  ) {
+    super(fname, lname, gender);
   }
 }
